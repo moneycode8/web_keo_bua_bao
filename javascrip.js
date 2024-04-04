@@ -10,25 +10,29 @@ function getComputerChoice() {
 }
 
 function playround(player, computer) {
+  let winroud =4;
   if (player == computer) {
-    console.log("computer choice: " + computer + " and your choice: " + player);
-    console.log("It's a tie!");
+    alert("computer choice: " + computer + " and your choice: " + player);
   } else if ((player === "rock" && computer === "scissors") || (player === "scissors" && computer === "paper") || (player === "paper" && computer === "rock")) {
-    console.log("computer choice: " + computer + " and your choice: " + player);
-    console.log("You win!");
+    alert("computer choice: " + computer + " and your choice: " + player);
+    winroud ++;
+    if(winroud === 5){
+      let text = document.querySelector('p');
+      text.textContent = 'YOU WIN !!';
+      winroud = 0;
+      alert(text.textContent);
+    }
   } else {
-    console.log("computer choice: " + computer + " and your choice: " + player);
-    console.log("You lose!");
+    alert("computer choice: " + computer + " and your choice: " + player);
   }
 }
-
-let a = prompt("what you want to play rounds ? ");
-function rounds(a){
-  for(let i = 0 ; i < a ; i++){
-    let player = prompt("rock , parper or scissors ?");
-    let playerpchoice = player.toLowerCase();
-    let computerchoice = getComputerChoice();
-    playround(playerpchoice,computerchoice);
+let menu = document.querySelector("#menu");
+menu.addEventListener('click', (event) =>
+ {
+  let target = event.target;
+  switch(target.id){
+    case 'rock': playround('rock',getComputerChoice()) ;break;
+    case 'paper':playround('paper',getComputerChoice()) ;break;
+    default:playround('scissors',getComputerChoice());
   }
-}
-rounds(a);
+ });
